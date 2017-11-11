@@ -18,7 +18,6 @@ export default class Movie extends Component {
         return (
             <div>
                 <h3>{this.props.movie.title}</h3>
-                <p>{this.props.desc}</p>
             </div>
         )
     }
