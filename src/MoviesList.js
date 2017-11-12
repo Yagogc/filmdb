@@ -1,10 +1,10 @@
 /* eslint react/no-did-mount-set-state: 0 */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import Movie from './Movie';
 
-class MoviesList extends Component {
+class MoviesList extends PureComponent {
   state = {
     movies: [],
   }
