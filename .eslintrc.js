@@ -27,7 +27,5 @@ module.exports = {
         //"react/no-did-mount-set-state": 0,
         "no-console": 0,
         "linebreak-style": 0,
-        "indent": 0,
-        "react/jsx-indent": 0
     }
 };
