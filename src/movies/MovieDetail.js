@@ -8,8 +8,8 @@ import {connect} from 'react-redux';
 import { bindActionCreators} from 'redux';
 import {getMovie, resetMovie, setMovie} from './actions'
 
-const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
-const BACKDROP_PATH = 'http://image.tmdb.org/t/p/w1280';
+const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
+const BACKDROP_PATH = 'https://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component {
 
