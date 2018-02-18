@@ -9,8 +9,10 @@ import { bindActionCreators} from 'redux';
 import {getMovies} from './actions'
 class MoviesList extends PureComponent {
   async componentDidMount() {
-	const {getMovies, isLoaded} = this.props;
-	if(!isLoaded) {
+	const {getMovies, isLoaded, moviesLoadedAt} = this.props;
+	const oneHour =  60 * 60 * 1000;
+	if(!isLoaded
+		|| ((new Date()) - new Date(moviesLoadedAt)) > oneHour ) {
 		getMovies();
 	}
   }
@@ -29,6 +31,7 @@ class MoviesList extends PureComponent {
 const mapStateToProps = state => ({
 	movies: state.movies.movies,
 	isLoaded: state.movies.moviesLoaded,
+	moviesLoadedAt: state.movies.moviesLoadedAt,
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
