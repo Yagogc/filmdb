@@ -4,33 +4,40 @@ import styled from 'styled-components';
 import Overdrive from 'react-overdrive';
 import { Poster } from './Movie';
 
+import {connect} from 'react-redux';
+import { bindActionCreators} from 'redux';
+import {getMovie, resetMovie, setMovie} from './actions'
+
 const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
 const BACKDROP_PATH = 'http://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component {
-  state = {
-    movie: {},
-  }
+
+	componentWillMount() {
+		const {match, movies, setMovie} = this.props;
+		movies.map(function(movie){
+			if (movie.id.toString() === match.params.id) {
+				return setMovie(movie);
+			}
+			return null
+		})
+	}
 
   async componentDidMount() {
-    try {
-      const res = await fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=65e043c24785898be00b4abc12fcdaae&language=en-US`);
-      const movie = await res.json();
-      console.log('after movie');
-      this.setState({
-        movie,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+	const {getMovie, match} = this.props;
+	getMovie(match.params.id);
+  }
+  
+  componentWillUnmount() {
+	this.props.resetMovie();
   }
 
   render() {
-    const { movie } = this.state;
+    const { movie } = this.props;
     return (
       <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
         <MovieInfo>
-          <Overdrive id={movie.id}>
+          <Overdrive id={`/${movie.id}`}>
             <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
           </Overdrive>
           <div>
@@ -44,7 +51,20 @@ class MovieDetail extends Component {
   }
 }
 
-export default MovieDetail;
+const mapStateToProps = state => ({
+	movies: state.movies.movies,
+	areLoaded: state.movies.moviesLoaded,
+	movie: state.movies.movie,
+	isLoaded: state.movies.movieLoaded,
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	getMovie,
+	setMovie,
+	resetMovie
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetail);
 
 
 const MovieWrapper = styled.div`
