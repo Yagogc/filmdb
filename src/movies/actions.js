@@ -1,5 +1,6 @@
 export const GET_MOVIES = 'GET_MOVIES'
 export const GET_MOVIE = 'GET_MOVIE'
+export const SET_MOVIE = 'SET_MOVIE'
 export const RESET_MOVIE = 'RESET_MOVIE'
 
 export function getMovies() {
@@ -24,6 +25,16 @@ export function getMovie(id) {
 		})
 	}
 }
+
+export function setMovie(movie) {
+	return function(dispatch) {
+		return dispatch({
+			type: SET_MOVIE,
+			data: movie
+		})
+	}
+}
+
 export function resetMovie() {
 	return {
 		type: RESET_MOVIE

@@ -6,17 +6,28 @@ import { Poster } from './Movie';
 
 import {connect} from 'react-redux';
 import { bindActionCreators} from 'redux';
-import {getMovie, resetMovie} from './actions'
+import {getMovie, resetMovie, setMovie} from './actions'
 
 const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
 const BACKDROP_PATH = 'http://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component {
 
+	componentWillMount() {
+		const {match, movies, setMovie} = this.props;
+		movies.map(function(movie){
+			if (movie.id.toString() === match.params.id) {
+				return setMovie(movie);
+			}
+			return null
+		})
+	}
+
   async componentDidMount() {
 	const {getMovie, match} = this.props;
 	getMovie(match.params.id);
   }
+  
   componentWillUnmount() {
 	this.props.resetMovie();
   }
@@ -41,12 +52,15 @@ class MovieDetail extends Component {
 }
 
 const mapStateToProps = state => ({
+	movies: state.movies.movies,
+	areLoaded: state.movies.moviesLoaded,
 	movie: state.movies.movie,
 	isLoaded: state.movies.movieLoaded,
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
 	getMovie,
+	setMovie,
 	resetMovie
 }, dispatch)
 
