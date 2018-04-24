@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Overdrive from 'react-overdrive';
+import Rating from './Rating';
 
 const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
 
@@ -11,12 +12,7 @@ const Movie = ({ movie }) => (
     <Overdrive id={`/${movie.id}`}>
       <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
     </Overdrive>
-    <Rating>
-      <Star role="img" aria-label="star">
-        ⭐
-      </Star>
-      {movie.vote_average}/10
-    </Rating>
+    <Rating rating={movie.vote_average} padded />
     <Title>{movie.title}</Title>
   </Wrapper>
 );
@@ -34,22 +30,12 @@ export const Poster = styled.img`
   transition: transform 0.3s ease-in-out;
 `;
 
-export const Star = styled.span`
-  font-size: 14px;
-`;
 export const Title = styled.h2`
   color: white;
   font-size: 18px;
   padding: 0 10px;
   text-align: left;
   margin: 7px 0;
-`;
-export const Rating = styled.p`
-  color: white;
-  padding: 0 10px;
-  text-align: left;
-  margin: 7px 0;
-  font-size: 12px;
 `;
 export const Wrapper = styled(Link)`
   text-decoration: none;
