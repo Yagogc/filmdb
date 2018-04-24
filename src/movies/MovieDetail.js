@@ -49,13 +49,25 @@ class MovieDetail extends Component {
               <Rating rating={movie.vote_average} />
               <h1>{movie.title}</h1>
               <h3>{movie.tagline}</h3>
-              <h4>{movie.release_date}</h4>
+              <h4>Release date: {movie.release_date}</h4>
             </div>
           </MovieInfo>
         </MovieHeader>
         <MovieBody>
           <h3>Overview</h3>
           <p>{movie.overview}</p>
+          {movie.homepage && (
+            <MovieLink href={movie.homepage}>
+              Movie website{' '}
+              <span role="img" aria-label="website">
+                🌐
+              </span>
+            </MovieLink>
+          )}
+          <p>
+            <b>Status: </b>
+            {movie.status}
+          </p>
         </MovieBody>
       </MovieWrapper>
     );
@@ -150,4 +162,10 @@ const PosterSingle = Poster.extend`
     transform: scale(1.1);
     transform-origin: bottom right;
   }
+`;
+
+const MovieLink = styled.a`
+  text-decoration: none;
+  font-weight: bold;
+  text-align: left;
 `;
