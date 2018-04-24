@@ -96,6 +96,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MovieDetail);
 const MovieWrapper = styled.div`
   position: relative;
   background: white;
+  min-height: calc(100vh - 100px);
 `;
 
 const MovieHeader = styled.div`

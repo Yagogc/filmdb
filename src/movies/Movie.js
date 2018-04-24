@@ -12,8 +12,10 @@ const Movie = ({ movie }) => (
     <Overdrive id={`/${movie.id}`}>
       <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
     </Overdrive>
-    <Rating rating={movie.vote_average} padded />
-    <Title>{movie.title}</Title>
+    <Info>
+      <Rating rating={movie.vote_average} padded />
+      <Title>{movie.title}</Title>
+    </Info>
   </Wrapper>
 );
 
@@ -46,4 +48,9 @@ export const Wrapper = styled(Link)`
       transform: scale3D(1.02, 1.02, 1.02) rotate(-2deg);
     }
   }
+`;
+
+const Info = styled.div`
+  max-width: 154px;
+  margin: 0 auto;
 `;
