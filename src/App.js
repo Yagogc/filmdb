@@ -18,7 +18,7 @@ import rootReducer from './rootReducer';
 import MoviesList from './movies/MoviesList';
 import MovieDetail from './movies/MovieDetail';
 
-const middleware = [logger, thunk];
+const middleware = [thunk];
 
 const store = createStore(
   rootReducer,
