@@ -108,7 +108,7 @@ const MovieHeader = styled.div`
 `;
 
 const MovieBody = styled.div`
-  padding: 0 10%;
+  padding: 0 10% 1rem;
   text-align: left;
   @media (min-width: 720px) {
     text-align: center;
