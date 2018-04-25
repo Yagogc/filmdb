@@ -60,14 +60,12 @@ class MovieDetail extends Component {
         <MovieBody>
           <h3>Overview</h3>
           <MovieDescription>{movie.overview}</MovieDescription>
-          {movie.homepage && (
-            <MovieLink href={movie.homepage}>
-              Movie website{' '}
-              <span role="img" aria-label="website">
-                🌐
-              </span>
-            </MovieLink>
-          )}
+          <MovieLink href={movie.homepage}>
+            Movie website{' '}
+            <span role="img" aria-label="website">
+              🌐
+            </span>
+          </MovieLink>
           <p>
             <b>Status: </b>
             {movie.status}
