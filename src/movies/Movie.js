@@ -5,12 +5,19 @@ import styled from 'styled-components';
 import Overdrive from 'react-overdrive';
 import Rating from './Rating';
 
-const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
+const POSTER_PATH_X1 = 'https://image.tmdb.org/t/p/w154';
+const POSTER_PATH_X2 = 'https://image.tmdb.org/t/p/w308';
 
 const Movie = ({ movie }) => (
   <Wrapper to={`/${movie.id}`}>
     <Overdrive id={`/${movie.id}`}>
-      <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+      <Poster>
+        <img
+          src={`${POSTER_PATH_X1}${movie.poster_path}`}
+          srcSet={`${POSTER_PATH_X2}${movie.poster_path} 2x`}
+          alt={movie.title}
+        />
+      </Poster>
     </Overdrive>
     <Info>
       <Rating rating={movie.vote_average} padded />
@@ -27,9 +34,13 @@ Movie.propTypes = {
   }).isRequired,
 };
 
-export const Poster = styled.img`
-  box-shadow: 0 0 35px black;
+export const Poster = styled.picture`
+  display: block;
+  margin: 0 auto;
   transition: transform 0.3s ease-in-out;
+  > img {
+    box-shadow: 0 0 35px black;
+  }
 `;
 
 export const Title = styled.h2`
