@@ -55,7 +55,7 @@ class MovieDetail extends Component {
         </MovieHeader>
         <MovieBody>
           <h3>Overview</h3>
-          <p>{movie.overview}</p>
+          <MovieDescription>{movie.overview}</MovieDescription>
           {movie.homepage && (
             <MovieLink href={movie.homepage}>
               Movie website{' '}
@@ -169,4 +169,8 @@ const MovieLink = styled.a`
   text-decoration: none;
   font-weight: bold;
   text-align: left;
+`;
+
+const MovieDescription = styled.p`
+  text-align: justify;
 `;
