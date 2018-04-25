@@ -6,7 +6,7 @@ import Overdrive from 'react-overdrive';
 import Rating from './Rating';
 
 const POSTER_PATH_X1 = 'https://image.tmdb.org/t/p/w154';
-const POSTER_PATH_X2 = 'https://image.tmdb.org/t/p/w308';
+const POSTER_PATH_X2 = 'https://image.tmdb.org/t/p/w300';
 
 const Movie = ({ movie }) => (
   <Wrapper to={`/${movie.id}`}>
