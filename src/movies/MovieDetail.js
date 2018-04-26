@@ -10,8 +10,7 @@ import { getMovie, resetMovie, setMovie } from './actions';
 
 import Rating from './Rating';
 
-const POSTER_PATH_X1 = 'https://image.tmdb.org/t/p/w154';
-const POSTER_PATH_X2 = 'https://image.tmdb.org/t/p/w300';
+const POSTER_PATH_X1 = 'https://image.tmdb.org/t/p/w300';
 const BACKDROP_PATH = 'https://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component {
@@ -35,19 +34,17 @@ class MovieDetail extends Component {
   }
 
   render() {
-    const { movie } = this.props;
+    const { movie, movies, match } = this.props;
+    const film = movies.filter(movie => movie.id == match.params.id);
     return (
       <MovieWrapper>
-        <MovieHeader backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
+        <MovieHeader backdrop={`${BACKDROP_PATH}${film[0].backdrop_path}`}>
           <MovieInfo>
-            <Overdrive id={`/${movie.id}`}>
-              <PosterSingle>
-                <img
-                  src={`${POSTER_PATH_X1}${movie.poster_path}`}
-                  srcSet={`${POSTER_PATH_X2}${movie.poster_path} 2x`}
-                  alt={movie.title}
-                />
-              </PosterSingle>
+            <Overdrive id={`${movie.id}`} duration={100}>
+              <PosterSingle
+                src={`${POSTER_PATH_X1}${film[0].poster_path}`}
+                alt={movie.title}
+              />
             </Overdrive>
             <div>
               <Rating rating={movie.vote_average} />
@@ -152,20 +149,18 @@ const MovieInfo = styled.div`
 `;
 
 const PosterSingle = Poster.extend`
-  > img {
-    @media (max-width: 720px) {
-      margin: 20px auto 10px;
-      width: 100%;
-      max-width: 200px;
-      display: inherit;
-    }
-    @media (min-width: 720px) {
-      position: relative;
-      top: 3rem;
-      z-index: 3;
-      transform: scale(1.1);
-      transform-origin: bottom right;
-    }
+  @media (max-width: 720px) {
+    margin: 20px auto 10px;
+    width: 100%;
+    max-width: 200px;
+    display: inherit;
+  }
+  @media (min-width: 720px) {
+    position: relative;
+    top: 3rem;
+    z-index: 3;
+    transform: scale(1.1);
+    transform-origin: bottom right;
   }
 `;
 
