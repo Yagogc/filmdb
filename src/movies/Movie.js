@@ -29,7 +29,7 @@ Movie.propTypes = {
 
 export const Poster = styled.img`
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 10px;
   width: 154px;
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 0 35px black;
